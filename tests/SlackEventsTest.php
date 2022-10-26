@@ -7,6 +7,7 @@ use Lisennk\LaravelSlackEvents\Tests\Traits\EventRequestDataTrait;
 use \Lisennk\LaravelSlackEvents\EventCreator;
 use \Lisennk\LaravelSlackEvents\Events\ReactionAdded;
 use \Lisennk\LaravelSlackEvents\Events\ChannelCreated;
+use Lisennk\LaravelSlackEvents\Events\WorkflowStepExecute;
 use \Illuminate\Http\Request;
 
 /**
@@ -36,6 +37,17 @@ class SlackEventsTest extends TestCase
 
         $event = $events->make('channel_created');
         $this->assertInstanceOf(ChannelCreated::class, $event);
+    }
+
+    /**
+     * Test for proper event class from event type creation
+     */
+    public function testShouldCreateWorkflowStepExecute()
+    {
+        $events = new EventCreator();
+
+        $event = $events->make('workflow_step_execute');
+        $this->assertInstanceOf(WorkflowStepExecute::class, $event);
     }
 
     /**
